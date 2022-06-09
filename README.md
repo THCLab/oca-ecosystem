@@ -1,5 +1,9 @@
 # oca-ecosystem
 
+## Purpose of this repository
+
+Provides core OCA components and examples of their usage.
+
 ## Services exposed via Docker Compose
 
 - Browser: http://localhost:8000
