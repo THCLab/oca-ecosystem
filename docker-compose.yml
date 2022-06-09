@@ -1,0 +1,77 @@
+version: '3'
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - oca_browser_dist:/usr/share/nginx/html/
+    depends_on:
+      - oca_browser
+    ports:
+      - 8000:80
+
+  oca_browser:
+    image: humancolossus/oca-browser:0.1.1
+    volumes:
+      - oca_browser_dist:/app/dist/spa
+
+  oca_repository_backend:
+    image: humancolossus/oca-repository:0.3.3
+    container_name: oca-repository
+    command: /bin/sh -c "bundle exec rackup -o 0.0.0.0"
+    environment:
+      - BASE_URL=http://localhost:9292
+      - ES_URL=http://oca_repository_es:9200
+    volumes:
+      - oca_repository_storage:/usr/src/app/storage
+    ports:
+      - 9292:9292
+    networks:
+      - oca_repository_network
+
+  oca_repository_es:
+    image: elasticsearch:8.1.2
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - oca_repository_data:/usr/share/elasticsearch/data
+    networks:
+      - oca_repository_network
+
+  oca_data_vault:
+    image: humancolossus/oca-data-vault:0.2.1
+    container_name: oca-data-vault
+    command: /bin/bash -c "bundle exec rackup -o 0.0.0.0"
+    volumes:
+      - oca_data_vault_storage:/usr/src/app/storage
+    environment:
+      - MONGODB_URI=oca_data_vault_mongodb:27017
+    ports:
+      - 9293:9292
+    networks:
+      - oca_data_vault_network
+
+  oca_data_vault_mongodb:
+    image: mongo:5.0.9
+    volumes:
+      - oca_data_vault_data:/data/db
+    networks:
+      - oca_data_vault_network
+
+volumes:
+  oca_browser_dist:
+    driver: local
+  oca_repository_data:
+    driver: local
+  oca_repository_storage:
+    driver: local
+  oca_data_vault_data:
+    driver: local
+  oca_data_vault_storage:
+    driver: local
+
+networks:
+  oca_repository_network:
+  oca_data_vault_network:
