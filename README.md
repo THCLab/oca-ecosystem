@@ -6,4 +6,4 @@
 - OCA repository: http://localhost:9292
 - OCA data vault: http://localhost:9293
 
-See https://oca.colossi.network/guide/getting-started.html#oca-ecosystem for descrption of the above components.
+See https://oca.colossi.network/guide/getting-started.html#oca-ecosystem for descrption of the above components and their underlying purpose.
