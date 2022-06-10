@@ -10,12 +10,17 @@ services:
       - 8000:80
 
   oca_browser:
-    image: humancolossus/oca-browser:0.1.1
+    image: humancolossus/oca-browser:0.1.2
+    entrypoint: /bin/sh -c "envsubst < /app/dist/config.template.js > /app/dist/config.js"
+    environment:
+      DEFAULT_LANGUAGE: "en"
+      OCA_REPOSITORY_URLS: "http://localhost:9292"
+      DATA_VAULT_URLS: "http://localhost:9293"
     volumes:
-      - oca_browser_dist:/app/dist/spa
+      - oca_browser_dist:/app/dist
 
   oca_repository_backend:
-    image: humancolossus/oca-repository:0.3.3
+    image: humancolossus/oca-repository:0.3.4
     container_name: oca-repository
     command: /bin/sh -c "bundle exec rackup -o 0.0.0.0"
     environment:
