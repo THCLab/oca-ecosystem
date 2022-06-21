@@ -1,0 +1,184 @@
+# Layout definition for rendering OCA Form
+#
+# type FormLayout = {
+#   config?: {
+#     css?: {
+#       style?: string
+#     }
+#   }
+#   elements: ElementLayout[]
+# }
+#
+# type ElementLayout = BaseElementLayout &
+#   (MetaLayout | ContentLayout | CategoryLayout | AttributeLayout)
+#
+# type BaseElementLayout = {
+#   config?: Config
+# }
+#
+# type Config = {
+#   css?: {
+#     style?: string
+#     classes?: string[]
+#   }
+# }
+#
+# type MetaLayout = {
+#   type: 'meta'
+#   parts: {
+#     name: 'name' | 'description' | 'language'
+#     config?: Config
+#   }[]
+# }
+#
+# type ContentLayout = {
+#   type: 'content'
+#   text: string
+#   image?: string
+# }
+#
+# type CategoryLayout = {
+#   type: 'category'
+#   id: string
+# }
+#
+# type AttributeLayout = {
+#   type: 'attribute'
+#   name: string
+#   parts: {
+#     name: 'input' | 'label' | 'information'
+#     config?: Config
+#   }[]
+# }
+
+# configuration that applies to whole OCA Form
+config:
+  css:
+    # css style definition for whole OCA element
+    # classes starting with '_' sign are added to elements by renderer
+    style: |-
+      form {
+        background-color: white;
+        font-family: 'Lato', 'sans-serif';
+        color: #575756;
+        padding: 20px;
+        border: 1px solid rgba(0, 0, 0, .1);
+        border-radius: 5px;
+        box-shadow: 0 5px 8px 0 rgb(0 0 0 / 10%), 0 3px 10px 0 rgb(0 0 0 / 10%);
+      }
+      ._category h1, h2, h3, h4, h5, h6 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.15em;
+        margin: 0.3em 0;
+      }
+      ._category h1 { font-size: 22px; }
+      ._category h2 { font-size: 18px; }
+      ._category {
+        border: 0;
+        border-bottom: 2px dashed #0000004d;
+        margin: 10px 0 20px 0;
+      }
+      ._control {
+        margin: 5px 0;
+      }
+      ._label {
+        display: block;
+      }
+      ._input {
+        padding: 0 0.5em;
+      }
+      ._input[multiple] {
+        height: 6.5em;
+        display: grid;
+        align-items: center;
+      }
+      ._reference {
+        width: 100%;
+        height: 100%;
+      }
+      ._input, .language {
+        margin: 2px 0;
+        width: 100%;
+        height: 2.5em;
+        background-color: white;
+        border-radius: 3px;
+        border-width: 1px;
+      }
+      ._information {
+        color: #6A6A6A;
+        font-size: 14px;
+        font-style: italic;
+        line-height: 1.5;
+        text-align: justify;
+      }
+      .language {
+        width: 100px;
+        height: 1.75em;
+        float: right;
+      }
+      #submit {
+        margin-top: 10px;
+        width: 150px;
+        height: 2em;
+        background-color: white;
+        border-width: 1px;
+        border-radius: 3px;
+      }
+      #submit:hover {
+        background-color: lightgray;
+      }
+# list of elements that are applied to form in given order
+# all elements and it's parts are listed veritcaly
+elements:
+# type meta of element is for specifing place of:
+# - OCA name (part name: 'name')
+# - OCA description (part name: 'description')
+# - selected OCA language (part name: 'language')
+- type: meta
+  config:
+    css:
+      style: 'justify-content: space-between;'
+  parts:
+  - name: language
+    config:
+      css:
+        classes:
+        - language
+  - name: name
+    config:
+      css:
+        style: 'font-size: 24px; font-weight: 700; margin: 10px 0;'
+  - name: description
+    config:
+      css:
+        style: 'font-size: 16px; font-weight: 300; line-height: 1.5;'
+# type category sets place for category
+# id of category is defined in LabelOverlay
+- type: category
+  id: _cat-1_
+# type attribute sets place for attribute input
+# available parts:
+# - label: attribute label from LabelOverlay
+# - information: attribute information from InformationOverlay
+# - input: HTML input element for capturing attribute data
+- type: attribute
+  name: attribute1
+  parts:
+  - name: label
+  - name: input
+  - name: information
+- type: attribute
+  name: attribute2
+  parts:
+  - name: label
+  - name: input
+  - name: information
+- type: category
+  id: _cat-2_
+- type: attribute
+  name: attribute3
+  parts:
+  - name: label
+  - name: input
+  - name: information
