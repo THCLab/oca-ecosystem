@@ -10,7 +10,7 @@ services:
       - 8000:80
 
   oca_browser:
-    image: humancolossus/oca-browser:0.1.8
+    image: humancolossus/oca-browser:0.1.9
     entrypoint: /bin/sh -c "envsubst < /app/dist/config.template.js > /app/dist/config.js"
     environment:
       DEFAULT_LANGUAGE: "en"
