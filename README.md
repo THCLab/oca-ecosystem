@@ -1,6 +1,12 @@
 ## Purpose of this repository
 
-Provides some examples of OCA core components.
+Demonstrate how OCA core components interact with each other.
+
+## License
+
+EUPL 1.2 
+
+We have distilled the most crucial license specifics to make your adoption seamless: [see here for details](https://github.com/THCLab/licensing).
 
 ### OCA introduction and overview of the ecosystem
 
