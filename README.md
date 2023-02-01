@@ -1,3 +1,4 @@
+[![Board Status](https://dev.azure.com/argonauths/3b0587c4-b3e1-46bd-8c51-885752deec01/43e50f28-2bb5-4de8-8a2b-4efb60efde6a/_apis/work/boardbadge/b832661c-dd6a-450e-8275-363e489b8484)](https://dev.azure.com/argonauths/3b0587c4-b3e1-46bd-8c51-885752deec01/_boards/board/t/43e50f28-2bb5-4de8-8a2b-4efb60efde6a/Microsoft.RequirementCategory)
 ## Purpose of this repository
 
 Demonstrate how OCA core components interact with each other.
