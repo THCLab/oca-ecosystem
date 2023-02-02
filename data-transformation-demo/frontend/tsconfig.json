@@ -1,0 +1,29 @@
+{
+  "extends": "@quasar/app-webpack/tsconfig-preset",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "target": "ES2017",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noErrorTruncation": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "quasar"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts", "src/js/**/*", "src/boot/*"]
+}
